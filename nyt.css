@@ -1,0 +1,63 @@
+body {
+  font-family: sans-serif;
+  background-color: darkgrey;
+}
+
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.controls,
+.results {
+  display: flex;
+  flex: 1;
+  padding: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+nav {
+  margin-bottom: 50px;
+}
+
+#month {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#year {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.chart {
+}
+
+.bar-div {
+  display: flex;
+  flex-direction: row;
+  height: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.key-bar {
+  display: flex;
+  background-color: darkblue;
+}
+
+.bar-label {
+  display: flex;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  white-space: nowrap;
+  margin: 0;
+  padding-top: 1px;
+  padding-left: 15px;
+}

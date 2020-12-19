@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="nyt.css" />
+    <title>NY Times API Example</title>
+  </head>
+  <body>
+    <h1>NY Times Archive Search</h1>
+    <div class="wrapper">
+      <div class="controls">
+        <!-- Search Form-->
+          <label>Select a month and year &nbsp;</label>
+          <select id="month">
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+          <select id="year">
+          </select>
+            <button class="button" id="getDate">Submit Search</button>
+        </form>
+      </div>
+
+      <!-- Results Section -->
+      <div class="results">
+        <!-- Results Navigation -->
+        <!-- Results From Request -->
+        <div id="results"></div>
+      </div>
+    </div>
+    <script type="text/javascript" src="nyt.js"></script>
+  </body>
+</html>
