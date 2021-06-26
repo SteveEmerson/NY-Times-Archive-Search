@@ -9,13 +9,13 @@ const dateYear = document.querySelector('#year');
 const submitBtn = document.querySelector('#getDate');
 
 var max = new Date().getFullYear();
-    min = 1851;
+min = 1851;
 
-for (var i = max; i>=min; i--){
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.innerHTML = i;
-    dateYear.appendChild(opt);
+for (var i = max; i >= min; i--) {
+  var opt = document.createElement('option');
+  opt.value = i;
+  opt.innerHTML = i;
+  dateYear.appendChild(opt);
 }
 
 
@@ -31,7 +31,7 @@ const resultDiv = document.querySelector('#results');
 submitBtn.addEventListener('click', fetchResults);  //?expects to have text input from the user ... also refresh page
 
 
-function fetchResults(e){
+function fetchResults(e) {
 
   e.preventDefault();  //default nature of a form is to POST and refresh the page ... prevents the refresh in this case
   //console.log(e);
@@ -44,23 +44,23 @@ function fetchResults(e){
 
 
   fetch(proxyUrl + url)
-  .then(blob => blob.json())
-  .then(data => {
-    //console.table(data);
-    let keywordData = buildData(data);
-    let maxResults = 20;
-    let topResults = getTopResults(keywordData, maxResults);
-    makeChart(keywordData, topResults);
-  })
-  .catch(e => {
-    console.log(e);
-    return e;
-  });
+    .then(blob => blob.json())
+    .then(data => {
+      console.table(data);
+      let keywordData = buildData(data);
+      let maxResults = 20;
+      let topResults = getTopResults(keywordData, maxResults);
+      makeChart(keywordData, topResults);
+    })
+    .catch(e => {
+      console.log(e);
+      return e;
+    });
 
 }
 
 // Handles building the local data set
-function buildData(data){
+function buildData(data) {
 
   const num_articles = data.response.meta.hits;
   const articles = data.response.docs;
@@ -70,33 +70,33 @@ function buildData(data){
   let f_keywords = {};
   let max_keywords = 3;
 
-  for(f_article of frontPageArticles){
-    for(let i = 0; i < f_article.keywords.length; i++){
-      if(i >= max_keywords) {break;}
+  for (f_article of frontPageArticles) {
+    for (let i = 0; i < f_article.keywords.length; i++) {
+      if (i >= max_keywords) { break; }
 
       let curr_key = f_article.keywords[i].value;
-     
-      if(curr_key in f_keywords){
+
+      if (curr_key in f_keywords) {
         f_keywords[curr_key]++;
-      }else{
+      } else {
         f_keywords[curr_key] = 1;
       }
     }
-    
+
   }
 
   let count = 0;
-  for(const key_word in f_keywords){
-    if(f_keywords[key_word] > 10){
+  for (const key_word in f_keywords) {
+    if (f_keywords[key_word] > 10) {
       console.log(`${key_word}: ${f_keywords[key_word]}`);
     }
-    
+
   }
 
   return f_keywords;
 }
 
-function getTopResults(data, max = 0){
+function getTopResults(data, max = 0) {
 
   let w_data = {};
   Object.assign(w_data, data);
@@ -106,12 +106,12 @@ function getTopResults(data, max = 0){
   let data_size = Object.keys(w_data).length;
   let end = (max === 0 || max > data_size) ? data_size : max;
 
-  for(let i = 0; i < end; i++){
+  for (let i = 0; i < end; i++) {
     let largest_value = 0;
     let key_largest;
 
-    for(let key in w_data){
-      if(w_data[key] > largest_value){
+    for (let key in w_data) {
+      if (w_data[key] > largest_value) {
         largest_value = w_data[key];
         key_largest = key;
       }
@@ -127,9 +127,9 @@ function getTopResults(data, max = 0){
 
 }
 
-function makeChart(data, keyList){
+function makeChart(data, keyList) {
 
-  while(resultDiv.firstElementChild){
+  while (resultDiv.firstElementChild) {
     resultDiv.removeChild(resultDiv.firstChild);
   }
 
@@ -144,14 +144,14 @@ function makeChart(data, keyList){
   chartTitle.textContent = `Top ${keyList.length} Topics for ${months[dateMonth.value - 1]}, ${dateYear.value}`;
   chart.appendChild(chartTitle);
 
-  for (let key of keyList){
+  for (let key of keyList) {
     let barDiv = document.createElement('div');
     barDiv.className = 'bar-div';
     chart.appendChild(barDiv);
     let bar = document.createElement('div');
     bar.className = 'key-bar';
     bar.id = key;
-    let barLength = data[key]*10;
+    let barLength = data[key] * 10;
     bar.style.width = "" + barLength + "px"
     barDiv.appendChild(bar);
     let label = document.createElement('p');
@@ -173,7 +173,7 @@ function makeChart(data, keyList){
 //   }else{
 //     return;
 //   }
-  
+
 //   fetchResults(e);
 // }
 
