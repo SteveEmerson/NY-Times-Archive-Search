@@ -46,7 +46,7 @@ function fetchResults(e) {
   fetch(proxyUrl + url)
     .then(blob => blob.json())
     .then(data => {
-      console.table(data);
+      //console.table(data);
       let keywordData = buildData(data);
       let maxResults = 20;
       let topResults = getTopResults(keywordData, maxResults);
@@ -65,7 +65,7 @@ function buildData(data) {
   const num_articles = data.response.meta.hits;
   const articles = data.response.docs;
   let frontPageArticles = articles.filter(article => article.print_page === "1")
-  console.log(frontPageArticles[0]);
+  //console.log(frontPageArticles[0]);
 
   let f_keywords = {};
   let max_keywords = 3;
@@ -85,13 +85,11 @@ function buildData(data) {
 
   }
 
-  let count = 0;
-  for (const key_word in f_keywords) {
-    if (f_keywords[key_word] > 10) {
-      console.log(`${key_word}: ${f_keywords[key_word]}`);
-    }
-
-  }
+  // for (const key_word in f_keywords) {
+  //   if (f_keywords[key_word] > 10) {
+  //     console.log(`${key_word}: ${f_keywords[key_word]}`);
+  //   }
+  // }
 
   return f_keywords;
 }
@@ -152,7 +150,7 @@ function makeChart(data, keyList) {
     bar.className = 'key-bar';
     bar.id = key;
     let barLength = data[key] * 10;
-    bar.style.width = "" + barLength + "px"
+    bar.style.width = `${barLength}px`
     barDiv.appendChild(bar);
     let label = document.createElement('p');
     label.textContent = key;
